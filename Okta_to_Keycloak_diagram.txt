@@ -1,0 +1,26 @@
+Okta (IdP) → Keycloak (Service Provider / Broker) → Application
+User              Application              Keycloak (SP)              Okta (IdP)
+ |                     |                        |                        |
+ | 1) Access app       |                        |                        |
+ |-------------------->|                        |                        |
+ |                     | 2) Redirect to KC      |                        |
+ |                     |----------------------->|                        |
+ |                     |                        | 3) SAML AuthnRequest   |
+ |                     |                        |   Redirect to Okta     |
+ |                     |                        |----------------------->|
+ |                     |                        |                        |
+ |                     |                        |        4) User Login   |
+ |                     |                        |        (MFA/Policies)  |
+ |                     |                        |<-----------------------|
+ |                     |                        |                        |
+ |                     |                        | 5) Okta sends SAML     |
+ |                     |                        |    Response (Assertion)|
+ |                     |                        |<-----------------------|
+ |                     |                        |                        |
+ |                     |                        | 6) Validate signature  |
+ |                     |                        |    Extract attributes  |
+ |                     |                        |    Map roles/groups    |
+ |                     |                        |                        |
+ |                     | 7) Authentication OK   |                        |
+ |<--------------------|                        |                        |
+ |                     |                        |                        |
