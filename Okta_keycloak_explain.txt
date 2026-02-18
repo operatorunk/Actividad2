@@ -1,0 +1,58 @@
+Step-by-Step Explanation 
+1️⃣ User accesses the Application
+
+The user attempts to log in to the AML application.
+
+2️⃣ Application redirects to Keycloak
+
+The application is protected by Keycloak, so authentication is delegated there.
+
+3️⃣ Keycloak sends a SAML Authentication Request to Okta
+
+Keycloak acts as a Service Provider (SP) and redirects the user to Okta with a SAML AuthnRequest.
+
+4️⃣ Okta authenticates the user
+
+Okta performs:
+
+Credential validation
+
+MFA
+
+Policy checks
+
+5️⃣ Okta sends a SAML Response (Assertion) to Keycloak
+
+The SAML Assertion includes:
+
+NameID (email or username)
+
+AttributeStatements:
+
+given_name
+
+family_name
+
+email
+
+preferred_username
+
+roles (multi-valued: ACCESS_A_, APP_)
+
+The assertion is digitally signed.
+
+6️⃣ Keycloak validates and processes the Assertion
+
+Keycloak:
+
+Validates signature
+
+Verifies issuer and audience
+
+Extracts attributes
+
+Maps roles attribute to internal roles or groups
+
+7️⃣ Authentication successful
+
+Keycloak creates a session and grants access to the application.
