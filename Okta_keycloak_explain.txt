@@ -1,4 +1,4 @@
-Step-by-Step Explanation 
+ Step-by-Step Explanation 
 1️⃣ User accesses the Application
 
 The user attempts to log in to the AML application.
